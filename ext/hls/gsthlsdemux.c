@@ -506,7 +506,7 @@ create_stream_for_playlist (GstAdaptiveDemux * demux, GstM3U8 * playlist,
   hlsdemux_stream->do_typefind = TRUE;
   hlsdemux_stream->reset_pts = TRUE;
 }
-
+//根据m3u8文件创建stream
 static gboolean
 gst_hls_demux_setup_streams (GstAdaptiveDemux * demux)
 {
@@ -877,6 +877,7 @@ gst_hls_demux_handle_buffer (GstAdaptiveDemux * demux,
   }
 
   if (tags) {
+    //传递tag到下游元素，最终放到 inputselector的pad中
     gst_adaptive_demux_stream_set_tags (stream, tags);
     /* run typefind again on the trimmed buffer */
     hls_stream->do_typefind = TRUE;
@@ -1123,7 +1124,7 @@ gst_hls_demux_update_fragment_info (GstAdaptiveDemuxStream * stream)
 
   return GST_FLOW_OK;
 }
-
+//码率自适应，根据网络状况选择最大的bitrate
 static gboolean
 gst_hls_demux_select_bitrate (GstAdaptiveDemuxStream * stream, guint64 bitrate)
 {
