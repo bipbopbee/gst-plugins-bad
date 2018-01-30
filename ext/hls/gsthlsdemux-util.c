@@ -314,7 +314,7 @@ gst_hlsdemux_tsreader_find_pcrs_id3 (GstHLSTSReader * r,
   /* Extract the timestamps */
   if (!gst_tag_list_get_sample (taglist, GST_TAG_PRIVATE_DATA, &priv_data))
     goto out;
-
+//hls协议规定对于音频文件，文件头必须包含下列字符串，否则无法将音频信息以tag的形式下发
   if (!g_str_equal ("com.apple.streaming.transportStreamTimestamp",
           gst_structure_get_string (gst_sample_get_info (priv_data), "owner")))
     goto out;
